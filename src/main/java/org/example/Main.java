@@ -197,4 +197,18 @@ public class Main {
         }
         return ans;
     }
+
+    public static int longestOnes(int[] nums, int k) {
+        int[] cnt = new int[2];
+        int j = 0;
+        int ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            cnt[nums[i]]++;
+            while (cnt[0] > k) {
+                cnt[nums[j++]]--;
+            }
+            ans = Math.max(ans, i - j + 1);
+        }
+        return ans;
+    }
 }
