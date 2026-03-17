@@ -173,4 +173,28 @@ public class Main {
         }
         return max;
     }
+
+    public static int maxConsecutiveAnswers(String answerKey, int k) {
+        byte[] arr = new byte[answerKey.length()];
+        answerKey.getBytes(0, answerKey.length(), arr, 0);
+        int ans = 0, j = 0;
+        int[] cnt = new int[2];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 'F') {
+                cnt[0]++;
+            } else {
+                cnt[1]++;
+            }
+            while (cnt[0] > k && cnt[1] > k) {
+                if (arr[j] == 'F') {
+                    cnt[0]--;
+                } else {
+                    cnt[1]--;
+                }
+                j++;
+            }
+            ans = Math.max(ans, i - j + 1);
+        }
+        return ans;
+    }
 }
