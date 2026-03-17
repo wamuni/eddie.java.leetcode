@@ -13,6 +13,8 @@ public class Main {
         System.out.println(s);
         int m = maximumUniqueSubarray(new int[] {4,2,4,5,6});
         System.out.println(m);
+        int k = maxSubArrayLength(new int[] {1, 2, 3, 1, 2, 3, 1 ,2}, 2);
+        System.out.println(k);
     }
 
     public static long maxSum(List<Integer> nums, int m, int k) {
@@ -152,5 +154,23 @@ public class Main {
             maxS = Math.max(sum, maxS);
         }
         return maxS;
+    }
+
+    public static int maxSubArrayLength(int[] nums, int k) {
+        int maxN = 0;
+        for (int n: nums) {
+            maxN = Math.max(maxN, n);
+        }
+        int[] cnt = new int[maxN + 1];
+        int max = 0, j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            cnt[nums[i]]++;
+            while (cnt[nums[i]] > k) {
+                cnt[nums[j]]--;
+                j++;
+            }
+            max = Math.max(max, i - j + 1);
+        }
+        return max;
     }
 }
