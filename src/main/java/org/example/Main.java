@@ -9,6 +9,8 @@ public class Main {
         List<Integer> nums = Arrays.asList(5,9,9,2,4,5,4);
         long res = maxSum(nums, 1, 3);
         System.out.println(res);
+        int s = totalFruit(new int[] {3,3,3,1,2,1,1,2,3,3,4});
+        System.out.println(s);
     }
 
     public static long maxSum(List<Integer> nums, int m, int k) {
@@ -106,5 +108,25 @@ public class Main {
             max = Math.max(max, i - j + 1);
         }
         return max;
+    }
+
+    public static int totalFruit(int[] fruits) {
+        int cnt = 0;
+        int j = 0;
+        Map<Integer, Integer> tree = new HashMap<>();
+        for (int i = 0; i < fruits.length; i++) {
+            tree.merge(fruits[i], 1, Integer::sum);
+            while (tree.size() > 2) {
+                int t = tree.get(fruits[j]);
+                if (t > 1) {
+                    tree.put(fruits[j], t - 1);
+                } else {
+                    tree.remove(fruits[j]);
+                }
+                j++;
+            }
+            cnt = Math.max(cnt, i - j + 1);
+        }
+        return cnt;
     }
 }
