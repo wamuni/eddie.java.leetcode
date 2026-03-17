@@ -1,0 +1,110 @@
+package org.example;
+
+import java.util.*;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> nums = Arrays.asList(5,9,9,2,4,5,4);
+        long res = maxSum(nums, 1, 3);
+        System.out.println(res);
+    }
+
+    public static long maxSum(List<Integer> nums, int m, int k) {
+        Integer[] arr = nums.toArray(Integer[]::new);
+
+        long max = 0;
+        int left = 0;
+        int right = 0;
+        long sum = 0;
+
+        Map<Integer, Integer> cnt = new HashMap<>();
+
+        while (right < k) {
+            sum += arr[right];
+            cnt.merge(arr[right], 1, Integer::sum);
+            right++;
+        }
+
+        if (cnt.size() >= m) {
+            max = sum;
+        }
+
+        while (right < arr.length) {
+            sum += arr[right] - arr[left];
+            cnt.merge(arr[right], 1, Integer::sum);
+            int x = cnt.get(arr[left]);
+            if (x > 1) {
+                cnt.put(arr[left], x -1);
+            } else {
+                cnt.remove(arr[left]);
+            }
+
+            if (cnt.size() >= m) {
+                if (max < sum) {
+                    max = sum;
+                }
+            }
+
+            right++;
+            left++;
+        }
+
+        return max;
+    }
+
+    public static long maximumSubarraySum(int[] nums, int k) {
+        long max = 0;
+        long sum = 0;
+        int left = 0;
+        int right = 0;
+
+        Set<Integer> cnt = new HashSet<>();
+
+        while (right < k) {
+            cnt.add(nums[right]);
+            sum += nums[right++];
+        }
+
+        if (cnt.size() == k) {
+            max = sum;
+        }
+
+        while (right < nums.length) {
+            cnt.remove(nums[left]);
+            cnt.add(nums[right]);
+            sum += nums[right++] - nums[left++];
+            if (cnt.size() == k) {
+                if (max < sum) {
+                    max = sum;
+                }
+            }
+        }
+
+        return max;
+    }
+
+    public static int equalSubString(String s, String t, int maxCost) {
+        byte[] s_arr = new byte[s.length()];
+        byte[] t_arr = new byte[t.length()];
+        s.getBytes(0, s.length(), s_arr, 0);
+        t.getBytes(0, t.length(), t_arr, 0);
+        int [] diff = new int[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            diff[i] = Math.abs(s_arr[i] - t_arr[i]);
+        }
+        int j = 0;
+        int sum = 0;
+        int max = 0;
+        for (int i = 0; i < diff.length; i++) {
+            sum += diff[i];
+            while (sum > maxCost) {
+                sum -= diff[j];
+                j++;
+            }
+            max = Math.max(max, i - j + 1);
+        }
+        return max;
+    }
+}
