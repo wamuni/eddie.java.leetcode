@@ -11,6 +11,8 @@ public class Main {
         System.out.println(res);
         int s = totalFruit(new int[] {3,3,3,1,2,1,1,2,3,3,4});
         System.out.println(s);
+        int m = maximumUniqueSubarray(new int[] {4,2,4,5,6});
+        System.out.println(m);
     }
 
     public static long maxSum(List<Integer> nums, int m, int k) {
@@ -128,5 +130,27 @@ public class Main {
             cnt = Math.max(cnt, i - j + 1);
         }
         return cnt;
+    }
+
+    public static int maximumUniqueSubarray(int[] nums) {
+        int maxN = 0;
+        for (int num: nums) {
+            maxN = Math.max(maxN, num);
+        }
+        boolean[] has = new boolean[maxN + 1];
+        int sum = 0;
+        int maxS = 0;
+        int j = 0;
+        for (int n: nums) {
+            while(has[n]) {
+                has[nums[j]] = false;
+                sum -= nums[j];
+                j++;
+            }
+            has[n] = true;
+            sum += n;
+            maxS = Math.max(sum, maxS);
+        }
+        return maxS;
     }
 }
