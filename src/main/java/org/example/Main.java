@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         SlidingWindow sw = SlidingWindow.getInstance();
         BinarySearch bs = BinarySearch.getInstance();
-        int res = bs.lowerBand(new int[] {5, 7, 7, 8, 8, 10}, 8);
+        int res = bs.lowerBand3(new int[] {-1,0,3,5,9,12}, 2);
         System.out.println(res);
     }
 }
