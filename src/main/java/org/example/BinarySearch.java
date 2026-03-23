@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class BinarySearch {
     private static BinarySearch instance = null;
     private BinarySearch() {}
@@ -60,5 +62,20 @@ public class BinarySearch {
             }
         }
         return left;
+    }
+
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        Arrays.sort(arr2);
+        int cnt = 0;
+        for(int x : arr1) {
+            int idx = lowerBand3(arr2, x - d);
+            if (idx < 0) {
+                idx = ~idx;
+            }
+            if (idx == arr2.length || arr2[idx] > x + d) {
+                cnt++;
+            }
+        }
+        return cnt;
     }
 }

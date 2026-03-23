@@ -80,4 +80,46 @@
 
    > 因为left+right在Java中有可能出现栈溢出的情况
 
+2. `lowerBand` function, the implementation.
+
+    ```java
+    public int lowerBand(int[] nums, int target) {
+        int left = -1;
+        int right = nums.length;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+    ```
+
+    这个二分法的模版是一个左开右开的模版，最后返回的值，是 `>= target` 的第一个元素的下标，如果元素不存在，那么返回的结果就是数组的长度n；如果数组中最小的数都比target要大，那么返回的就是-1；
+
+    由此可以推断出以下结果：
+
+    1. `> target` 的第一个元素的下标， `lowerBand(nums, x+1)` 
+    2. `< target` 的最后一个元素下标，`lowerBand(nums, x) - 1`
+    3. `<=target` 的最后一个元素下标，`lowerBand(nums, x+1) - 1`
+
+    另外一种变形问题，求满足不同target的长度
+
+    1. `<x` 的元素个数， `lowerBand(nums, x)`
+    2. `<=x` 的元素个数，`lowerBand(nums, x+1)`
+    3. `>=x` 的元素个数，`n - lowerBand(nums, x)`
+    4. `>x`的元素个数，`n - lowerBand(nums, x+1)`
+
+3. 如果是有相关的问题，提出来的范围是一个绝对值，那么可以将其转换为
+
+    ```java
+    Math.abs(arr1[i] - arr2[j]) < d;
+    //Then, it is equal to
+    [arr1[i] - d, arr1[i] + d];
+    ```
+
+4. 为什么需要`~` 来对结果进行处理呢
 
