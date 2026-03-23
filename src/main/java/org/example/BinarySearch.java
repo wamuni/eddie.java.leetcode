@@ -78,4 +78,41 @@ public class BinarySearch {
         }
         return cnt;
     }
+
+    public int[] numSmallByFrequency(String[] queries, String[] words) {
+        int[] nums = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            nums[i] = f(words[i]);
+        }
+        Arrays.sort(nums);
+
+        int[] target = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            target[i] = f(queries[i]);
+        }
+
+        int[] ans = new int[queries.length];
+
+        for (int i = 0; i < target.length; i++) {
+            int res = lowerBand(nums, target[i] + 1);
+            ans[i] = words.length - res - 1;
+        }
+
+        return ans;
+    }
+
+    private int f(String s) {
+        int t = 'z';
+        int cnt = 0;
+        for (char c: s.toCharArray()) {
+            if (t == c) {
+                cnt++;
+            }
+            if (t > c) {
+                cnt = 1;
+                t = c;
+            }
+        }
+        return cnt;
+    }
 }
