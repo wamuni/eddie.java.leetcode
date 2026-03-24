@@ -24,4 +24,26 @@ public class Foundation {
         }
         return null;
     }
+
+    public int numIdenticalPairs(int[] nums) {
+        int cnt = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+
+    public int numIdenticalPairsOptimized(int[] nums) {
+        int cnt = 0;
+        int[] map = new int[101];
+        for (int x: nums) {
+            cnt += map[x];
+            map[x]++;
+        }
+        return cnt;
+    }
 }
