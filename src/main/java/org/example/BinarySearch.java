@@ -61,6 +61,8 @@ public class BinarySearch {
                 left = mid;
             }
         }
+        System.out.println("left: " + left);
+        System.out.println("right: " + right);
         return left;
     }
 
@@ -114,5 +116,31 @@ public class BinarySearch {
             }
         }
         return cnt;
+    }
+
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+        int n = spells.length;
+        int m = potions.length;
+        int[] ans = new int[n];
+        Arrays.sort(potions);
+        for (int i = 0; i < n; i++) {
+            int res = m - lowerBand(potions, (double) success / spells[i]);
+            ans[i] = res;
+        }
+        return ans;
+    }
+
+    private int lowerBand(int[] nums, double target) {
+        int left = -1;
+        int right = nums.length;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        return right;
     }
 }
