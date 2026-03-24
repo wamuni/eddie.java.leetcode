@@ -136,7 +136,7 @@
 
 ###### 知识点总结
 
-在遍历的过程中，遍历过的元素因为已经遍历过了，我们可以用一个map来记录
+1. 在遍历的过程中，遍历过的元素因为已经遍历过了，我们可以用一个map来记录
 
 ```java
 int cnt = 0;
@@ -147,3 +147,24 @@ for (int x: nums) {
 }
 ```
 
+2. 在有正负数的情况下，可以使用set来进行遍历，如果数据量足够小，那么可以使用一个boolean数组来确定
+
+    ```java
+    private static final int N = 1000;
+    public int findMaxK(int nums[]) {
+        boolean[] set = new boolean[N+1];
+        for (int n: nums) {
+            if (n > 0) {
+                set[n] = true;
+            }
+        }
+        for (int n: nums) {
+            if (n < 0 && set[-n]) {
+                ans = Math.Max(ans, -n);
+            }
+        }
+        return ans;
+    }
+    ```
+
+    
