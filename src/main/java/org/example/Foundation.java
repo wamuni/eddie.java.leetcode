@@ -1,6 +1,8 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Foundation {
@@ -45,5 +47,35 @@ public class Foundation {
             map[x]++;
         }
         return cnt;
+    }
+
+    public int findMaxK(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        int ans = -1;
+        for (int x: nums) {
+            if (set.contains(-x)) {
+                Math.max(ans, Math.abs(x));
+            }
+            set.add(x);
+        }
+        return ans;
+    }
+
+    private static final int N = 1000;
+
+    public int findMaxKOptimize(int[] nums) {
+        boolean[] set = new boolean[N + 1];
+        for (int n: nums) {
+            if (n > 0) {
+                set[n] = true;
+            }
+        }
+        int ans = -1;
+        for (int num: nums) {
+            if (num < 0 && set[-num]) {
+                ans = Math.max(ans, -num);
+            }
+        }
+        return ans;
     }
 }
