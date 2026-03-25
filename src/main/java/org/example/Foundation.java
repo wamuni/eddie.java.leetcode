@@ -154,4 +154,19 @@ public class Foundation {
         }
         return ans;
     }
+
+    public int maxOperations(int[] nums, int k) {
+        int ans = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int n: nums) {
+            int c = map.getOrDefault(k - n, 0);
+            if (c > 0) {
+                map.put(k-n, c-1);
+                ans++;
+            } else {
+                map.merge(n, 1, Integer::sum);
+            }
+        }
+        return ans;
+    }
 }
