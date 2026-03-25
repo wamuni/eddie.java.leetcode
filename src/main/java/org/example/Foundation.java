@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class Foundation {
     private static Foundation instance = null;
@@ -75,6 +72,53 @@ public class Foundation {
             if (num < 0 && set[-num]) {
                 ans = Math.max(ans, -num);
             }
+        }
+        return ans;
+    }
+
+    // 双循环暴力破解会超时
+    public int maxProfit(int[] prices) {
+        int ans = 0;
+        for(int i = prices.length - 1; i >= 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (prices[i] - prices[j] > 0) {
+                    ans = Math.max(ans, prices[i] - prices[j]);
+                }
+            }
+        }
+        return ans;
+    }
+
+    public int maxProfitOptimize(int[] prices) {
+        int ans = 0;
+        int min = prices[0];
+        for (int n: prices) {
+            ans = Math.max(ans, n - min);
+            min = Math.min(min, n);
+        }
+        return ans;
+    }
+
+    public int maximumDifference(int[] nums) {
+        int diff = 0;
+        int min = nums[0];
+        for (int n: nums) {
+            diff = Math.max(diff, n - min);
+            min = Math.min(min, n);
+        }
+        return diff == 0 ? -1: diff;
+    }
+
+    public int maxDistance(List<List<Integer>> arrays) {
+        int ans = 0;
+        int mn = Integer.MAX_VALUE / 2;
+        int mx = Integer.MIN_VALUE / 2;
+        for (List<Integer> l:  arrays) {
+            int x = l.getFirst();
+            int y = l.getLast();
+            ans = Math.max(ans, Math.max(mx - x, y - mn));
+            mx = Math.max(mx, y);
+            mn = Math.min(mn, x);
         }
         return ans;
     }
