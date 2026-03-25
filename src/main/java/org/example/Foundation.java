@@ -122,4 +122,36 @@ public class Foundation {
         }
         return ans;
     }
+
+    public int maximumSum(int[] nums) {
+        int[] mx = new int[82];
+        Arrays.fill(mx, Integer.MIN_VALUE);
+        int ans = 0;
+        for (int num: nums) {
+            int n = digitSum(num);
+            ans = Math.max(ans, mx[n] + num);
+            mx[n] = Math.max(mx[n], num);
+        }
+        return ans;
+    }
+
+    private int digitSum(int num) {
+        int sum = 0;
+        do {
+            sum += num % 10;
+            num /= 10;
+        } while (num > 0);
+        return sum;
+    }
+
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int ans = 0;
+        int[][] cnt = new int[10][10];
+        for (int[] pair: dominoes) {
+            int a = Math.min(pair[0], pair[1]);
+            int b = Math.max(pair[0], pair[1]);
+            ans += cnt[a][b]++;
+        }
+        return ans;
+    }
 }

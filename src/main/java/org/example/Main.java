@@ -13,7 +13,7 @@ public class Main {
 
 //        int[] res = fd.twoSum(new int[] {3,2,4}, 6);
 //        Arrays.stream(res).forEach(System.out::println);
-        int res = fd.findMaxK(new int[] {-30,34,1,32,26,-9,-30,22,-49,29,48,47,38,4,43,12,-1,-8,11,-37,32,40,9,15,-34,-34,-16,-5,26,-44,-36,-13,-16,10,39,-17,-22,17,-16});
+        int res = fd.maximumSum(new int[]{});
         System.out.println(res);
     }
 }
