@@ -169,4 +169,19 @@ public class Foundation {
         }
         return ans;
     }
+
+    public List<List<Integer>> pairSums(int[] nums, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        HashMap<Integer, Integer> cnt = new HashMap<>();
+        for (int n: nums) {
+            int c = cnt.getOrDefault(target - n, 0);
+            if (c > 0) {
+                cnt.put(target - n, c - 1);
+                ans.add(List.of(target - n, n));
+            } else {
+                cnt.merge(n, 1, Integer::sum);
+            }
+        }
+        return ans;
+    }
 }

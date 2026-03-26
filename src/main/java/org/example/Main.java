@@ -13,7 +13,7 @@ public class Main {
 
 //        int[] res = fd.twoSum(new int[] {3,2,4}, 6);
 //        Arrays.stream(res).forEach(System.out::println);
-        int res = fd.maximumSum(new int[]{});
+        List<List<Integer>> res = fd.pairSums(new int[]{5,6,5}, 11);
         System.out.println(res);
     }
 }
