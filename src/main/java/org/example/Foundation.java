@@ -213,4 +213,55 @@ public class Foundation {
         }
         return (int) (ans % MOD);
     }
+
+    public long countBadPairs(int[] nums) {
+        int n = nums.length;
+        long ans = (long) n * (n - 1) / 2;
+        HashMap<Integer, Integer> cnt = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int x = nums[i] - i;
+            int c = cnt.getOrDefault(x, 0);
+            ans -= c;
+            cnt.put(x, c + 1);
+        }
+        return ans;
+    }
+
+    public long countPairs(String[] words) {
+        Map<String, Integer> cnt = new HashMap<>();
+        long ans = 0;
+        for (String word: words) {
+            char[] t = word.toCharArray();
+            char base = t[0];
+            for (int i = 0; i < t.length; i++) {
+                t[i] = (char) ((t[i] - base + 26) % 26);
+            }
+            word = new String(t);
+            int c = cnt.getOrDefault(word, 0);
+            ans += c;
+            cnt.put(word, c + 1);
+        }
+        return ans;
+    }
+
+    public int getLargestOutlier(int[] nums) {
+        int ans = Integer.MIN_VALUE;
+        int total = 0;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int x: nums) {
+            cnt.merge(x, 1, Integer::sum);
+            total += x;
+        }
+
+        for (int x: nums) {
+            if (x % 2 == 0) {
+                int y = (total - x) / 2;
+                if (cnt.containsKey(y) && (y != x || cnt.get(y) > 1)) {
+                    ans = Math.max(ans, x);
+                }
+            }
+        }
+
+        return ans;
+    }
 }
