@@ -301,4 +301,15 @@ public class Foundation {
         }
         return ans;
     }
+
+    public long countCompleteDayPairs(int[] hours) {
+        long ans = 0;
+        int[] cnt = new int[24];
+        for (int t: hours) {
+            int t_mod = t % 24;
+            ans += cnt[(24 - t_mod) % 24];
+            cnt[t_mod]++;
+        }
+        return ans;
+    }
 }

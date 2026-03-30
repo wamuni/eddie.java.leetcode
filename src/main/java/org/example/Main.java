@@ -21,5 +21,8 @@ public class Main {
 
         int res_mod = fd.numPairsDivisibleBy60(new int[] {30,20,150,100,40});
         System.out.println(res_mod);
+
+        long res_hours = fd.countCompleteDayPairs(new int[] {72,48,24,3,21});
+        System.out.println(res_hours);
     }
 }
