@@ -15,5 +15,8 @@ public class Main {
 //        Arrays.stream(res).forEach(System.out::println);
         List<List<Integer>> res = fd.pairSums(new int[]{5,6,5}, 11);
         System.out.println(res);
+
+        int rev = fd.minMirrorPairDistance(new int[] {21, 120});
+        System.out.println(rev);
     }
 }

@@ -264,4 +264,30 @@ public class Foundation {
 
         return ans;
     }
+
+    public int reverse(int num) {
+        int rev = 0;
+        int n = (int) Math.log10((double) num);
+        while (num > 0) {
+            int mod = num % 10;
+            int x = mod * (int) Math.pow(10, n);
+            rev += x;
+            num /= 10;
+            n--;
+        }
+        return rev;
+    }
+
+    public int minMirrorPairDistance(int[] nums) {
+        int ans = nums.length + 1;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int idx = map.getOrDefault(nums[i], -1);
+            if (idx != -1) {
+                ans = Math.min(ans, Math.abs(idx - i));
+            }
+            map.put(reverse(nums[i]), i);
+        }
+        return ans == nums.length + 1 ? -1 : ans;
+    }
 }
