@@ -18,5 +18,8 @@ public class Main {
 
         int rev = fd.minMirrorPairDistance(new int[] {21, 120});
         System.out.println(rev);
+
+        int res_mod = fd.numPairsDivisibleBy60(new int[] {30,20,150,100,40});
+        System.out.println(res_mod);
     }
 }

@@ -290,4 +290,15 @@ public class Foundation {
         }
         return ans == nums.length + 1 ? -1 : ans;
     }
+
+    public int numPairsDivisibleBy60(int[] time) {
+        int ans = 0;
+        Map<Integer, Integer> mod = new HashMap<>();
+        for (int t: time) {
+            int t_mod = t % 60;
+            ans += mod.getOrDefault((60 - t_mod) % 60, 0);
+            mod.merge(t_mod, 1, Integer::sum);
+        }
+        return ans;
+    }
 }
