@@ -184,4 +184,33 @@ public class Foundation {
         }
         return ans;
     }
+
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, Integer> abs = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            if (abs.get(nums[i]) <= k) {
+                return true;
+            } else {
+
+            }
+        }
+
+        return false;
+    }
+
+    private static final int MOD = 1_000_000_007;
+
+    public int countTrapezoids(int[][] points) {
+        HashMap<Integer, Integer> cnt = new HashMap<>(points.length, 1);
+        for (int[] p: points) {
+            cnt.merge(p[1], 1, Integer::sum);
+        }
+        long ans = 0, s = 0;
+        for (int c: cnt.values()) {
+            long k = (long) c * (c - 1) / 2;
+            ans += s * k;
+            s += k;
+        }
+        return (int) (ans % MOD);
+    }
 }
