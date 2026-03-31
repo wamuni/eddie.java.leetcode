@@ -312,4 +312,31 @@ public class Foundation {
         }
         return ans;
     }
+
+    public int gcd(int x, int y) {
+        int mid = x % y;
+        if (mid == 0) return y;
+        return gcd(y, mid);
+    }
+
+    public int countBeautifulPairs(int[] nums) {
+        int ans = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int x: nums) {
+
+        }
+        return ans;
+    }
+
+    public long maximumTripletValue(int[] nums) {
+        long ans = 0;
+        int preMax = 0;
+        int preMaxDiff = 0;
+        for (int n: nums) {
+            ans = Math.max(ans, (long) preMaxDiff * n);
+            preMaxDiff = Math.max(preMaxDiff, preMax - n);
+            preMax = Math.max(preMax, n);
+        }
+        return ans;
+    }
 }

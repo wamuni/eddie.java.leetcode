@@ -24,5 +24,8 @@ public class Main {
 
         long res_hours = fd.countCompleteDayPairs(new int[] {72,48,24,3,21});
         System.out.println(res_hours);
+
+        int gcd = fd.gcd(5, 2);
+        System.out.println(gcd);
     }
 }
