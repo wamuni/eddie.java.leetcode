@@ -7,6 +7,7 @@ public class Main {
         SlidingWindow sw = SlidingWindow.getInstance();
         BinarySearch bs = BinarySearch.getInstance();
         Foundation fd = Foundation.getInstance();
+        PreSum ps = PreSum.getInstance();
 //        int res = bs.lowerBand3(new int[] {-1,0,1,1,2,2,2,3}, 2);
 //        int res = bs.findTheDistanceValue(new int[] {1, 1, 1}, new int[] {2, 2, 2}, 2);
 //        int[] res = bs.numSmallByFrequency(new String[] {"bbb", "cc"}, new String[] {"a", "aa", "aaa", "aaaa"});
@@ -27,5 +28,9 @@ public class Main {
 
         int gcd = fd.gcd(5, 2);
         System.out.println(gcd);
+
+        System.out.println(0 ^ 1 ^ 3 ^ 4 ^ 0 ^ 1);
+        int[] ans = ps.xorQueries(new int[] {16}, new int[][] {{0, 0}, {0, 0}, {0, 0}});
+        Arrays.stream(ans).forEach(System.out::println);
     }
 }
