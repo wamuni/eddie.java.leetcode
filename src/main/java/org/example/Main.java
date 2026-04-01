@@ -32,5 +32,7 @@ public class Main {
         System.out.println(0 ^ 1 ^ 3 ^ 4 ^ 0 ^ 1);
         int[] ans = ps.xorQueries(new int[] {16}, new int[][] {{0, 0}, {0, 0}, {0, 0}});
         Arrays.stream(ans).forEach(System.out::println);
+
+        System.out.println(0 ^ 1 ^ 0);
     }
 }

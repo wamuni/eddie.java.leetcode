@@ -64,4 +64,16 @@ public class PreSum {
         }
         return ans;
     }
+
+    public boolean[] isArraySpecial(int[] nums, int[][] queries) {
+        boolean[] ans = new boolean[queries.length];
+        int[] s = new int[nums.length];
+        for (int i = 1 ; i < nums.length; i++) {
+            s[i] = s[i - 1] + (nums[i-1] % 2 == nums[i] % 2 ? 1: 0);
+        }
+        for (int i = 0; i < queries.length; i++) {
+            ans[i] = s[queries[i][0]] == s[queries[i][1]];
+        }
+        return ans;
+    }
 }
