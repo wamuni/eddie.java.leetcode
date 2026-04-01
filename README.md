@@ -189,3 +189,14 @@ for (int x: nums) {
             ````
 
         3. 这样就可以把“相似”的字符串，统一到一起，在HashMap中进行计数
+
+#### PreSum
+
+```java
+ private static final int VOWELS = 0x208222;
+private int isVowel(String word) {
+        char ch1 = word.charAt(0);
+        char ch2 = word.charAt(word.length() - 1);
+        return (VOWELS >> ch1) & (VOWELS >> ch2) & 1;
+    }
+```
