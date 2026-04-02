@@ -76,4 +76,30 @@ public class PreSum {
         }
         return ans;
     }
+
+    public int maxAbsoluteSum(int[] nums) {
+        int s = 0, mx = 0, mn = 0;
+        for (int x: nums) {
+            s += x;
+            if (s > mx) mx = s;
+            else if (s < mn) mn = s;
+        }
+        return mx - mn;
+    }
+
+    public long maxProfit(int[] prices, int[] strategy, int k) {
+        int n = prices.length;
+        long[] sum = new long[n + 1];
+        long[] sumSell = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            sum[i + 1] = sum[i] + strategy[i] * prices[i];
+            sumSell[i + 1] = sum[i] + prices[i];
+        }
+        long ans = sum[n];
+        for (int i = k; i <= n; i++) {
+            long res = sum[i - k] + sum[n] + sumSell[i] - sumSell[i - k/2];
+            ans = Math.max(ans, res);
+        }
+        return ans;
+    }
 }
