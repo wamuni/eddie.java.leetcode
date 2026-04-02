@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PreSum {
     private static PreSum instance = null;
     private PreSum() {};
@@ -99,6 +102,34 @@ public class PreSum {
         for (int i = k; i <= n; i++) {
             long res = sum[i - k] + sum[n] + sumSell[i] - sumSell[i - k/2];
             ans = Math.max(ans, res);
+        }
+        return ans;
+    }
+
+    public int subarraySum(int[] nums, int k) {
+        int[] s = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            s[i+1] = s[i] + nums[i];
+        }
+        int ans = 0;
+        Map<Integer, Integer> cnt = new HashMap<>(s.length, 1);
+        for (int sj: s) {
+            ans += cnt.getOrDefault(sj - k, 0);
+            cnt.merge(sj, 1, Integer::sum);
+        }
+        return ans;
+    }
+
+    public int numSubarrayWithSum(int[] nums, int goal) {
+        int[] s = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            s[i + 1] = s[i] + nums[i];
+        }
+        int ans = 0;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int sp: s) {
+            ans += cnt.getOrDefault(sp - goal, 0);
+            cnt.merge(sp, 1, Integer::sum);
         }
         return ans;
     }
