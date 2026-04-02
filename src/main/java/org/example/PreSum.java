@@ -133,4 +133,26 @@ public class PreSum {
         }
         return ans;
     }
+
+    private static final int MOD_TO = 1_000_000_007;
+
+    public int numOfSubarrays(int[] arr) {
+        long ans = 0;
+        int[] pre = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            pre[i + 1] = pre[i] + arr[i];
+        }
+
+        int[] cnt = new int[2];
+        for (int sp: pre) {
+            if (sp % 2 == 0) {
+                ans += cnt[1];
+                cnt[0]++;
+            } else {
+                ans += cnt[0];
+                cnt[1]++;
+            }
+        }
+        return (int) (ans % MOD_TO);
+    }
 }
